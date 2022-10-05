@@ -47,9 +47,10 @@ class CourseController extends Controller
      * @param  \App\Models\Course  $course
      * @return \Illuminate\Http\Response
      */
-    public function show(Course $course)
+    public function show($id)
     {
-        //
+        $course = Course::findOrFail($id);
+        return new CourseResource($course);
     }
 
     /**
