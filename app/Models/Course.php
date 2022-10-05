@@ -10,6 +10,17 @@ class Course extends Model
 {
     use HasFactory, UuidTrait;
 
+    /**
+     * Fix Return uuid
+     */
+    public $incrementing = false;
+    protected $keyType = 'uuid';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
     protected $fillable = [
         'name',
         'description',

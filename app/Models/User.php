@@ -14,6 +14,12 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable, UuidTrait;
 
     /**
+     * Fix Return uuid
+     */
+    public $incrementing = false;
+    protected $keyType = 'uuid';
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
