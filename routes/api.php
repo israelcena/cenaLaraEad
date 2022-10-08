@@ -8,5 +8,7 @@ Route::get('/health-check', function () {
     return response()->json(['success' => true,]);
 })->name('health-check');
 
-Route::get('/courses', [CourseController::class, 'index'])->name('courses');
-Route::get('/courses/{id}', [CourseController::class, 'show'])->name('courses.show');
+Route::controller(CourseController::class)->group(function() {
+    Route::get('/courses','index')->name('courses');
+    Route::get('/courses/{id}', 'show')->name('courses.show');
+});
