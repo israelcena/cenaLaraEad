@@ -9,8 +9,6 @@ use App\Http\Resources\CourseResource;
 
 class CourseController extends Controller
 {
-    protected $repository;
-
     public function __construct(CourseRepository $courseRepository)
     {
         $this->repository = $courseRepository;   
