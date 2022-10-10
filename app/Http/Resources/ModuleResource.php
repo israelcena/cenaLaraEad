@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Course;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ModuleResource extends JsonResource
@@ -14,8 +15,10 @@ class ModuleResource extends JsonResource
      */
     public function toArray($request)
     {
+        $course = Course::findOrFail($this->course_id)->name;
         return [
             'id' => $this->id,
+            'courseName'=> $course,
             'name' => $this->name,
             'description' => $this->description,
         ];
