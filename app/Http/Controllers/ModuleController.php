@@ -33,9 +33,9 @@ class ModuleController extends Controller
         return new ModuleResource($this->repository->getOne($id));
     }
 
-    public function showByCourse($id)
+    public function showByCourse($courseId)
     {
-        return ModuleResource::collection($this->repository->getModulesById($id));
+        return ModuleResource::collection($this->repository->getModulesById($courseId));
     }
 
     public function edit(string $id)
