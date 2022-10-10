@@ -6,11 +6,11 @@ use App\Models\Traits\UuidTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Module extends Model
+class Lesson extends Model
 {
     use HasFactory, UuidTrait;
 
-    /**
+        /**
     * Fix Return uuid
     */
     public $incrementing = false;
@@ -18,16 +18,13 @@ class Module extends Model
 
     protected $fillable = [
         'name',
+        'slug',
         'description',
+        'video'
     ];
 
-    public function course()
+    public function module()
     {
-        return $this->belongsTo(Course::class);
-    }
-
-    public function lesson()
-    {
-        return $this->hasMany(Lesson::class);
+        return $this->belongsTo(Module::class);
     }
 }
