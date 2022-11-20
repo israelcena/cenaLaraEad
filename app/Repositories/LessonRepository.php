@@ -4,23 +4,12 @@ namespace App\Repositories;
 
 use App\Models\Lesson;
 
-class LessonRepository {
-
-  protected $entity;
+class LessonRepository extends Repositories
+{
 
   public function __construct(Lesson $lesson)
   {
     $this->entity = $lesson;
-  }
-
-  public function getAll()
-  {
-    return $this->entity->get();
-  }
-
-  public function getOne(string $id)
-  {
-    return $this->entity->findOrFail($id);
   }
 
   public function getLessonsById($moduleId)
