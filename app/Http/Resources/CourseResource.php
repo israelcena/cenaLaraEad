@@ -19,7 +19,8 @@ class CourseResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
-            'img' => $this->image ? Storage::url($this->image) : 'null',
+            // 'img' => $this->image ? Storage::url($this->image) : 'null',
+            'img' => $this->image,
         ];
     }
 }
