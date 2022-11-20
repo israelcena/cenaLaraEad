@@ -6,30 +6,35 @@ use App\Models\Traits\UuidTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Lesson extends Model
+class Support extends Model
 {
     use HasFactory, UuidTrait;
 
-        /**
+    /**
     * Fix Return uuid
     */
     public $incrementing = false;
     protected $keyType = 'uuid';
 
     protected $fillable = [
-        'name',
-        'slug',
+        'qa',
         'description',
-        'video'
     ];
 
-    public function module()
+    public $qaStatus = [
+        'P' => 'pending',
+        'Q' => 'question',
+        'A' => 'answered',
+    ];
+
+    public function lesson()
     {
-        return $this->belongsTo(Module::class);
+        return $this->belongsTo(Lesson::class);
     }
 
-    public function supports()
+    public function user()
     {
-        return $this->hasMany(Support::class);
+        return $this->belongsTo(User::class);
     }
+
 }

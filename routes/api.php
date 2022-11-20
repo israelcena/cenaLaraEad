@@ -1,8 +1,13 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{CourseController, LessonController, ModuleController};
+use App\Http\Controllers\{CourseController, LessonController, ModuleController, SupportController};
+
+Route::get('/', function () {
+    return response()->json([
+        'success' => true,
+    ]);
+});
 
 Route::get('/health-check', function () {
     return response()->json(['success' => true,]);
@@ -20,3 +25,9 @@ Route::controller(LessonController::class)->group(function() {
     Route::get('/lesson/{id}', 'show')->name('lesson.show');
 });
 
+Route::controller(SupportController::class)->group(function(){
+    Route::get('/supports', 'index')->name('supports'); 
+    Route::get('/supports/me', 'showByUser')->name('support.user');
+    Route::get('/supports/{id}', 'show')->name('support.show');
+    Route::get('/lesson/{id}/supports', 'showByLesson')->name('lesson.supports');
+});
