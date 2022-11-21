@@ -2,16 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreSupportRequest;
 use App\Http\Resources\SupportResource;
 use App\Models\Support;
 use App\Repositories\SupportRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 
 class SupportController extends Controller
 {
     public function __construct(SupportRepository $supportRepository)
     {
-        $this->repository = $supportRepository;   
+        $this->repository = $supportRepository;
     }
 
     /**
@@ -26,12 +28,12 @@ class SupportController extends Controller
 
     public function showByUser(Request $request)
     {
-        return SupportResource::collection($this->repository->getByLessonToAuthUser($request->all()));
+        return SupportResource::collection($this->repository->getByQuery($request->all()));
     }
 
     public function showByLesson(Request $request)
     {
-        return SupportResource::collection($this->repository->getByLesson($request->all()));
+        // return SupportResource::collection($this->repository->getByLesson($request->all()));
     }
 
     /**
@@ -50,9 +52,11 @@ class SupportController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreSupportRequest $request): SupportResource
     {
-        //
+        $newSupport = $this->repository->storeSupport($request->validated());
+
+        return new SupportResource($newSupport);
     }
 
     /**

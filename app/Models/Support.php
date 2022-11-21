@@ -19,6 +19,7 @@ class Support extends Model
     protected $fillable = [
         'qa',
         'description',
+        'lesson_id'
     ];
 
     public $qaStatus = [

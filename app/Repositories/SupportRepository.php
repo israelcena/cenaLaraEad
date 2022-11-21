@@ -17,7 +17,17 @@ class SupportRepository extends Repositories
     // return $this->entity->where('course_id', $users)->get();
   }
 
-  public function getByLessonToAuthUser(array $filters = [])
+  public function storeSupport(array $data): Support
+  {
+    $newSupport = $this->getUserAuth()->supports()->create([
+      'lesson_id' => $data['lesson'],
+      'qa' => $data['qa'],
+      'description' => $data['description'],
+    ]);
+    return $newSupport;
+  }
+
+  public function getByQuery(array $filters = [])
   {
     return $this->getUserAuth()
       ->supports()
@@ -29,25 +39,14 @@ class SupportRepository extends Repositories
         if (isset($filters['qa'])) {
           $query->where('qa', $filters['qa']);
         }
-        
+
         if (isset($filters['filter'])) {
-          $query->where('description', 'LIKE', "%{$filters['filter']}%" );
+          $query->where('description', 'LIKE', "%{$filters['filter']}%");
         }
       })->get();
   }
 
-  public function getByLesson(array $filters = [])
-  {
-    return $this->getUserAuth()
-      ->supports()
-      ->where(function ($query) use ($filters) {
-        if (isset($filters['lesson'])) {
-          $query->where('lesson_id');
-        }
-      })->get();
-  }
-
-  protected function getUserAuth(): User
+  private function getUserAuth(): User
   {
     // return auth()->user();
     return User::first();

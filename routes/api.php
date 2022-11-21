@@ -27,6 +27,7 @@ Route::controller(LessonController::class)->group(function() {
 
 Route::controller(SupportController::class)->group(function(){
     Route::get('/supports', 'index')->name('supports'); 
+    Route::post('/supports', 'store')->name('supports.store');
     Route::get('/supports/me', 'showByUser')->name('support.user');
     Route::get('/supports/{id}', 'show')->name('support.show');
     Route::get('/lesson/{id}/supports', 'showByLesson')->name('lesson.supports');
