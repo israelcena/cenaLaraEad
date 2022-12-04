@@ -27,7 +27,7 @@ class SupportRepository extends Repositories
     return $newSupport;
   }
 
-  public function getByQuery(array $filters = []): User
+  public function getByQuery(array $filters = [])
   {
     return $this->getUserAuth()
       ->supports()
