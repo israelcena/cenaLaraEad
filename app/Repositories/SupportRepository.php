@@ -12,11 +12,6 @@ class SupportRepository extends Repositories
     $this->entity = $support;
   }
 
-  public function getByUser()
-  {
-    // return $this->entity->where('course_id', $users)->get();
-  }
-
   public function storeSupport(array $data): Support
   {
     $newSupport = $this->getUserAuth()->supports()->create([
@@ -50,7 +45,7 @@ class SupportRepository extends Repositories
 
   public function createReplyToSupportId(string $supportId, array $request)
   {
-    $user = $this->getUserAuth()->id; 
+    $user = $this->getUserAuth()->id;
     $support = $this->getSupport($supportId);
 
     return $support->replies()->create([
@@ -63,11 +58,5 @@ class SupportRepository extends Repositories
   private function getSupport(string $id)
   {
     return $this->entity->findOrFail($id);
-  }
-
-  private function getUserAuth(): User
-  {
-    // return auth()->user();
-    return User::first();
   }
 }
