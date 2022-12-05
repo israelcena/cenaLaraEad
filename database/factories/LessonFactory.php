@@ -24,7 +24,7 @@ class LessonFactory extends Factory
             'name' => $name,
             'slug' => Str::slug($name),
             'description' => fake()->sentence(4),
-            'video' => fake()->unique()->imageUrl(640, 480, 'animals', true),
+            'video' => fake()->imageUrl(640, 480, 'animals', true),
         ];
     }
 }
