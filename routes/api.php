@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{CourseController, LessonController, ModuleController, SupportController};
+use App\Http\Controllers\{CourseController, LessonController, ModuleController, ReplySupportController, SupportController};
+use App\Models\ReplySupport;
 
 Route::get('/', function () {
     return response()->json([
@@ -31,4 +32,9 @@ Route::controller(SupportController::class)->group(function(){
     Route::get('/supports/me', 'showByUser')->name('support.user');
     Route::get('/supports/{id}', 'show')->name('support.show');
     Route::get('/lesson/{id}/supports', 'showByLesson')->name('lesson.supports');
+});
+
+Route::controller(ReplySupportController::class)->group(function(){
+    Route::get('/replies', 'index')->name('replies');
+    Route::post('/replies/{id}', 'store')->name('reply.store');
 });

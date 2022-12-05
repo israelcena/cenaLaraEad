@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             ModuleSeeder::class,
             LessonSeeder::class,
             SupportSeeder::class,
+            ReplySupportSeeder::class,
         ]);
     }
 }

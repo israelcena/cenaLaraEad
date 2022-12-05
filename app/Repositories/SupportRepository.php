@@ -46,6 +46,23 @@ class SupportRepository extends Repositories
       })->get();
   }
 
+  public function createReplyToSupportId(string $supportId, array $request)
+  {
+    $user = $this->getUserAuth()->id; 
+    $support = $this->getSupport($supportId);
+
+    return $support->replies()->create([
+      'description' => $request['description'],
+      'user_id' => $user,
+      'support_id' => $support->id,
+    ]);
+  }
+
+  private function getSupport(string $id)
+  {
+    return $this->entity->findOrFail($id);
+  }
+
   private function getUserAuth(): User
   {
     // return auth()->user();

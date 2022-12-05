@@ -4,10 +4,10 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class SupportResource extends JsonResource
+class ReplySupportResource extends JsonResource
 {
     /**
-     * Transform the resource collection into an array.
+     * Transform the resource into an array.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
@@ -16,13 +16,9 @@ class SupportResource extends JsonResource
     {
         // return parent::toArray($request);
         return [
-            'id' => $this->id,
-            'status' => $this->qa,
-            'status_label' => $this->qaStatus[$this->qa],
             'description' => $this->description,
+            'support' => new SupportResource($this->support),
             'user' => new UserResource($this->user),
-            'lesson' => new LessonResource($this->lesson),
-            // 'replies' => ReplySupportResource::collection($this->replies),
         ];
     }
 }
