@@ -43,7 +43,9 @@ class SupportRepository extends Repositories
         if (isset($filters['filter'])) {
           $query->where('description', 'LIKE', "%{$filters['filter']}%");
         }
-      })->get();
+      })
+      ->orderBy('updated_at')
+      ->get();
   }
 
   public function createReplyToSupportId(string $supportId, array $request)

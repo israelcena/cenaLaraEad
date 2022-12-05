@@ -21,6 +21,8 @@ class ReplySupport extends Model
     // put $table because the name table is not default
     protected $table = 'reply_support';
 
+    protected $touches = ['support'];
+
     public function support()
     {
       return $this->belongsTo(Support::class);
