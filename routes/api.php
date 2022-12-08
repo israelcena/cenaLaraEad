@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{CourseController, LessonController, ModuleController, ReplySupportController, SupportController};
+use App\Http\Controllers\Auth\AuthController;
 use App\Models\ReplySupport;
 
 Route::get('/', function () {
@@ -9,6 +10,8 @@ Route::get('/', function () {
         'success' => true,
     ]);
 });
+
+Route::post('/auth', [AuthController::class, 'auth'])->name('auth');
 
 Route::get('/health-check', function () {
     return response()->json(['success' => true,]);
