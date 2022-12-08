@@ -34,7 +34,8 @@ Route::controller(SupportController::class)->group(function(){
     Route::get('/lesson/{id}/supports', 'showByLesson')->name('lesson.supports');
 });
 
-Route::controller(ReplySupportController::class)->group(function(){
-    Route::get('/replies', 'index')->name('replies');
-    Route::post('/replies/{id}', 'store')->name('reply.store');
+Route::controller(ReplySupportController::class)->prefix('replies')->group(function(){
+    Route::get('/', 'index')->name('replies');
+    Route::post('/', 'store')->name('reply.store');
+    Route::get('/{id}', 'show')->name('replies.show');
 });

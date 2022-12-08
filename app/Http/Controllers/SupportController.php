@@ -28,12 +28,7 @@ class SupportController extends Controller
 
     public function showByUser(Request $request)
     {
-        return SupportResource::collection($this->repository->getByQuery($request->all()));
-    }
-
-    public function showByLesson(Request $request)
-    {
-        // return SupportResource::collection($this->repository->getByLesson($request->all()));
+        return SupportResource::collection($this->repository->getMySupports($request->all()));
     }
 
     /**

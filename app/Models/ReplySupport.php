@@ -8,29 +8,32 @@ use Illuminate\Database\Eloquent\Model;
 
 class ReplySupport extends Model
 {
-    use HasFactory, UuidTrait;
-    
-      /**
-    * Fix Return uuid
-    */
-    public $incrementing = false;
-    protected $keyType = 'uuid';
+  use HasFactory, UuidTrait;
 
-    protected $fillable = ['support_id', 'user_id','description'];
+  /**
+   * Fix Return uuid
+   */
+  public $incrementing = false;
+  protected $keyType = 'uuid';
 
-    // put $table because the name table is not default
-    protected $table = 'reply_support';
+  protected $fillable = [
+    'support_id', 
+    'user_id', 
+    'description'
+  ];
 
-    protected $touches = ['support'];
+  // put $table because the name table is not default
+  protected $table = 'reply_support';
 
-    public function support()
-    {
-      return $this->belongsTo(Support::class);
-    }
+  protected $touches = ['support'];
 
-    public function user()
-    {
-      return $this->belongsTo(User::class);
-    }
+  public function support()
+  {
+    return $this->belongsTo(Support::class);
+  }
 
+  public function user()
+  {
+    return $this->belongsTo(User::class);
+  }
 }

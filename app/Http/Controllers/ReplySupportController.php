@@ -41,9 +41,9 @@ class ReplySupportController extends Controller
      * @param  \App\Http\Requests\StoreReplySupportRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store($supportId, StoreReplySupportRequest $request)
+    public function store(StoreReplySupportRequest $request)
     {
-        return new ReplySupportResource($this->supportRepository->createReplyToSupportId($supportId, $request->validated()));
+        return new ReplySupportResource($this->supportRepository->createReplyToSupportId($request->validated()));
     }
 
     /**
@@ -54,7 +54,7 @@ class ReplySupportController extends Controller
      */
     public function show(ReplySupport $replySupport)
     {
-        //
+        return ReplySupportResource::collection(ReplySupport::findOrFail($replySupport->id));
     }
 
     /**

@@ -3,7 +3,6 @@
 namespace App\Repositories;
 
 use App\Models\Support;
-use App\Models\User;
 
 class SupportRepository extends Repositories
 {
@@ -22,19 +21,25 @@ class SupportRepository extends Repositories
     return $newSupport;
   }
 
+  public function getMySupports(array $filters = [])
+  {
+    $filters['user'] = $this->getUserAuth()->id;
+    return $this->getByQuery($filters);
+  }
+
   public function getByQuery(array $filters = [])
   {
-    return $this->getUserAuth()
-      ->supports()
+    return $this->entity
       ->where(function ($query) use ($filters) {
         if (isset($filters['lesson'])) {
           $query->where('lesson_id', $filters['lesson']);
         }
-
         if (isset($filters['qa'])) {
           $query->where('qa', $filters['qa']);
         }
-
+        if (isset($filters['user'])) {
+          $query->where('user_id', $filters['user']);
+        }
         if (isset($filters['filter'])) {
           $query->where('description', 'LIKE', "%{$filters['filter']}%");
         }
@@ -43,20 +48,14 @@ class SupportRepository extends Repositories
       ->get();
   }
 
-  public function createReplyToSupportId(string $supportId, array $request)
+  public function createReplyToSupportId(array $request)
   {
     $user = $this->getUserAuth()->id;
-    $support = $this->getSupport($supportId);
 
-    return $support->replies()->create([
+    return $this->entity->replies()->create([
       'description' => $request['description'],
       'user_id' => $user,
-      'support_id' => $support->id,
+      'support_id' => $request['support'],
     ]);
-  }
-
-  private function getSupport(string $id)
-  {
-    return $this->entity->findOrFail($id);
   }
 }
