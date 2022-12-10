@@ -16,11 +16,11 @@ class LessonResource extends JsonResource
     public function toArray($request)
     {
         $module = Module::findOrFail($this->module_id)->name;
-        
+
         return [
             'id' => $this->id,
-            // 'lessonName' => $module, 
-            'lessonName' => ucwords(strtolower($module)), 
+            // 'lessonName' => $module,
+            'lessonName' => ucwords(strtolower($module)),
             'name' => $this->name,
             'slug' => $this->slug,
             'description' => $this->description,
