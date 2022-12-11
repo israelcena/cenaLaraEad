@@ -20,7 +20,6 @@ abstract class Repositories
 
   public function getUserAuth(): User
   {
-    // return auth()->user();
-    return User::first();
+    return auth()->user();
   }
 }
